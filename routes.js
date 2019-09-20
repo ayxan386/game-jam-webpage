@@ -69,20 +69,22 @@ module.exports = (app, db) => {
   app.route("/adminsonly").get((req, res) => {
     res.sendFile(path.join(__dirname, "./views", "competitionPage.html"));
   });
-  app.get("/randomIndex", (req, res) => {
+  app.put("/randomIndex", (req, res) => {
     db.collection("gameJam").findOne({}, (err, doc) => {
       if (err) console.log(err);
       if (doc) {
-        let topic;
-        if (doc.selected === "") {
-          let index = Math.floor(Math.random() * doc.topics.length);
-          doc.selected = doc.topics[index];
-          topic = doc.topics[index];
-          db.collection("gameJam").save(doc);
-        } else {
-          topic = doc.selected;
+        if (doc.password == req.body.pass) {
+          let topic;
+          if (doc.selected === "") {
+            let index = Math.floor(Math.random() * doc.topics.length);
+            doc.selected = doc.topics[index];
+            topic = doc.topics[index];
+            db.collection("gameJam").save(doc);
+          } else {
+            topic = doc.selected;
+          }
+          res.send({ topic });
         }
-        res.send({ topic });
       }
     });
   });
@@ -90,9 +92,11 @@ module.exports = (app, db) => {
     db.collection("gameJam").findOne({}, (err, doc) => {
       if (err) console.log(err);
       if (doc) {
-        doc.start = Date.parse(req.body.start);
-        doc.deadline = Date.parse(req.body.end);
-        db.collection("gameJam").save(doc);
+        if (doc.password == req.body.pass) {
+          doc.start = Date.parse(req.body.start);
+          doc.deadline = Date.parse(req.body.end);
+          db.collection("gameJam").save(doc);
+        }
       }
     });
   });
@@ -100,13 +104,18 @@ module.exports = (app, db) => {
     db.collection("gameJam").findOne({}, (err, doc) => {
       if (err) console.log(err);
       if (doc) {
-        doc.isGoing = !doc.isGoing;
-        if (!doc.isGoing) {
-          doc.start = -1;
-          doc.deadline = -1;
-          doc.selected = "";
+        // console.log(req.body);
+        // console.log(doc);
+
+        if (doc.password == req.body.pass) {
+          doc.isGoing = !doc.isGoing;
+          if (!doc.isGoing) {
+            doc.start = -1;
+            doc.deadline = -1;
+            doc.selected = "";
+          }
+          db.collection("gameJam").save(doc);
         }
-        db.collection("gameJam").save(doc);
       }
     });
   });
