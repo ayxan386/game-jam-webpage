@@ -70,3 +70,15 @@ main {
   font-size: 56px;
   padding: 7px;
 }
+
+@media (max-width: 1080px) {
+  main {
+    flex-direction: column;
+    #reg-form {
+      width: auto;
+    }
+    section {
+      margin: 15px 0;
+    }
+  }
+}

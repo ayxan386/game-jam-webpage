@@ -9,7 +9,7 @@ module.exports = (app, db) => {
     .post((req, res) => {
       db.collection("gameJam").findOne({}, (err, doc) => {
         if (err) console.log(err);
-        console.log(doc);
+        //console.log(doc);
 
         if (!doc) {
           doc = {

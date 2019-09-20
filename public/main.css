@@ -84,4 +84,19 @@ main #center li {
   font-size: 56px;
   padding: 7px;
 }
+
+@media (max-width: 1080px) {
+  main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  main #reg-form {
+    width: auto;
+  }
+  main section {
+    margin: 15px 0;
+  }
+}
 /*# sourceMappingURL=main.css.map */
