@@ -1,0 +1,22 @@
+{
+  "name": "bhos-game-jam",
+  "version": "1.0.0",
+  "description": "Web page for gaming community",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Aykhan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.0",
+    "mongodb": "^2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
