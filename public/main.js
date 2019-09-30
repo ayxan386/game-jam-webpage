@@ -18,12 +18,17 @@ $("#parti-reg").submit(event => {
   let body = {
     fullName: $("input[name=full-name]").val(),
     email: $("input[name=email]").val(),
-    phone: $("input[name=phone-number]").val()
+    phone: $("input[name=phone-number]").val(),
+    nickname: $("input[name=nickname]").val()
   };
   $.ajax({
     url: "/parti",
     method: "POST",
     data: body
+  }).done(data => {
+    if (!data) {
+      $("#parti-message").html("Successfully registered");
+    }
   });
   event.target.reset();
 });
@@ -36,7 +41,17 @@ $("#index-selector").submit(event => {
     method: "PUT",
     data: { pass: prompt("Password Please") }
   }).done(data => {
-    $("#index").html(`Topic : ${data.topic}`);
+    $("#index-message").html(`Topic : ${data.topic}`);
+  });
+});
+$("#reset-users").submit(event => {
+  event.preventDefault();
+  $.ajax({
+    url: "/resetuserdata",
+    method: "PUT",
+    data: { pass: prompt("Password Please") }
+  }).done(data => {
+    $("#reset-message").html(`${data}`);
   });
 });
 
@@ -65,5 +80,9 @@ $("#starter").submit(event => {
     url: "/start",
     method: "PUT",
     data: { pass }
+  }).done(data => {
+    if (data) {
+      $("#message-board").html(data);
+    }
   });
 });

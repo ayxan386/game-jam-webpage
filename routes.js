@@ -52,7 +52,9 @@ module.exports = (app, db) => {
         const parti = {
           name: req.body.fullName,
           email: req.body.email,
-          phone: req.body.phone
+          phone: req.body.phone,
+          nickname: req.body.nickname,
+          rates: {}
         };
         doc.participants.push(parti);
         db.collection("gameJam").save(doc);
@@ -108,13 +110,44 @@ module.exports = (app, db) => {
         // console.log(doc);
 
         if (doc.password == req.body.pass) {
-          doc.isGoing = !doc.isGoing;
+          let mess = "";
           if (!doc.isGoing) {
+            if (doc.start != -1 && doc.deadline != -1) {
+              if (doc.selected.length > 1) {
+                doc.isGoing = true;
+              } else {
+                mess += "Set the topic first";
+              }
+            } else {
+              mess += "Set the deadline first";
+            }
+          } else if (doc.isGoing) {
             doc.start = -1;
             doc.deadline = -1;
             doc.selected = "";
+            doc.isGoing = false;
+            mess = "Jam stopped";
           }
           db.collection("gameJam").save(doc);
+          res.send(mess);
+        }
+      }
+    });
+  });
+  app.put("/endofterm", (req, res) => {
+    db.collection("gameJam").findOne({}, (err, doc) => {
+      if (err) console.log(err);
+      if (doc) {
+        if (doc.deadline < Date.now()) {
+          if (doc.password == req.body.pass) {
+            doc.isGoing = false;
+            if (!doc.isGoing) {
+              doc.start = -1;
+              doc.deadline = -1;
+              doc.selected = "";
+            }
+            db.collection("gameJam").save(doc);
+          }
         }
       }
     });
@@ -130,6 +163,18 @@ module.exports = (app, db) => {
           topic: doc.selected
         };
         res.send(data);
+      }
+    });
+  });
+  app.put("/resetuserdata", (req, res) => {
+    db.collection("gameJam").findOne({}, (err, doc) => {
+      if (err) console.log(err);
+      if (doc) {
+        if (doc.password == req.body.pass) {
+          doc.participants = [];
+          db.collection("gameJam").save(doc);
+          res.send("Success");
+        }
       }
     });
   });

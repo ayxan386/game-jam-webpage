@@ -6,28 +6,35 @@ window.onload = () => {
   $.ajax({
     url: "/competitionInfo"
   }).done(data => {
-    if (data.isGoing) {
-      //Doing some calculations for the countdown
-      if (Date.now() > data.start) {
-        //Displaying topic name
-        $("#topic").html("Topic is " + data.topic);
+    if (Date.now() > data.deadline) {
+      $.ajax({
+        url: "/endofterm",
+        method: "PUT"
+      });
+    } else {
+      if (data.isGoing) {
+        //Doing some calculations for the countdown
+        if (Date.now() > data.start) {
+          //Displaying topic name
+          $("#topic").html("Topic is " + data.topic);
 
-        timeTillEnd = Math.floor((data.deadline - Date.now()) / 1000);
-        // console.log(timeTillEnd);
-        id = setInterval(() => {
-          timeTillEnd--;
-          displayTime(timeTillEnd);
-          if (timeTillEnd == 0) clearInterval(id);
-        }, 1000);
-      } else {
-        $("#topic").html("Competion has not started yet");
-        timeTillEnd = Math.floor((data.start - Date.now()) / 1000);
-        // console.log(timeTillEnd);
-        id = setInterval(() => {
-          timeTillEnd--;
-          displayTime(timeTillEnd, true);
-          if (timeTillEnd == 0) clearInterval(id);
-        }, 1000);
+          timeTillEnd = Math.floor((data.deadline - Date.now()) / 1000);
+          // console.log(timeTillEnd);
+          id = setInterval(() => {
+            timeTillEnd--;
+            displayTime(timeTillEnd);
+            if (timeTillEnd == 0) clearInterval(id);
+          }, 1000);
+        } else {
+          $("#topic").html("Competion has not started yet");
+          timeTillEnd = Math.floor((data.start - Date.now()) / 1000);
+          // console.log(timeTillEnd);
+          id = setInterval(() => {
+            timeTillEnd--;
+            displayTime(timeTillEnd, true);
+            if (timeTillEnd == 0) clearInterval(id);
+          }, 1000);
+        }
       }
     }
   });

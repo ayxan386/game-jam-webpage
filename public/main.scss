@@ -14,8 +14,10 @@ html {
   text-align: center;
 }
 main {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "T Ru Ru Pt" "Pts Ru Ru Pt";
+  grid-template-rows: 1fr 2fr;
+  row-gap: 5px;
   section {
     padding: 10px 25px;
     margin: 0 5px;
@@ -23,19 +25,20 @@ main {
     border-radius: 3px;
   }
   #reg-form {
-    width: 30%;
+    grid-area: Pt;
     text-align: center;
     .form-group {
       text-align: left;
     }
   }
   #topic-adder {
-    height: 75%;
+    grid-area: T;
     display: grid;
     justify-items: center;
     align-items: center;
   }
   #center {
+    grid-area: Ru;
     #categories {
       margin: 10px 0;
       ul {
@@ -57,6 +60,19 @@ main {
       padding: 3px 2px;
     }
   }
+  #parti-list-container {
+    grid-area: Pts;
+    overflow-y: scroll;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    button {
+      position: absolute;
+      bottom: 5px;
+    }
+  }
 }
 
 #countdown {
@@ -73,6 +89,7 @@ main {
 
 @media (max-width: 1080px) {
   main {
+    display: flex;
     flex-direction: column;
     #reg-form {
       width: auto;
@@ -80,5 +97,35 @@ main {
     section {
       margin: 15px 0;
     }
+  }
+}
+
+#user-rate {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(230, 230, 230, 0.75);
+  header {
+    text-align: center;
+    font-size: 22px;
+    padding: 7px 4px;
+  }
+  #rate-form {
+    position: relative;
+    top: 20vh;
+    z-index: 150;
+    margin: auto;
+    width: 25%;
+    min-height: 25rem;
+    border-radius: 4px;
+    padding: 15px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

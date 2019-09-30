@@ -17,12 +17,12 @@ html {
 }
 
 main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "T Ru Ru Pt" "Pts Ru Ru Pt";
+  -ms-grid-rows: 1fr 2fr;
+      grid-template-rows: 1fr 2fr;
+  row-gap: 5px;
 }
 
 main section {
@@ -33,7 +33,10 @@ main section {
 }
 
 main #reg-form {
-  width: 30%;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: Pt;
   text-align: center;
 }
 
@@ -42,13 +45,23 @@ main #reg-form .form-group {
 }
 
 main #topic-adder {
-  height: 75%;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: T;
   display: -ms-grid;
   display: grid;
   justify-items: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+main #center {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: Ru;
 }
 
 main #center #categories {
@@ -74,6 +87,30 @@ main #center li {
   padding: 3px 2px;
 }
 
+main #parti-list-container {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: Pts;
+  overflow-y: scroll;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main #parti-list-container button {
+  position: absolute;
+  bottom: 5px;
+}
+
 #countdown {
   font-size: 88px;
   font-family: Arial, Helvetica, sans-serif;
@@ -87,6 +124,9 @@ main #center li {
 
 @media (max-width: 1080px) {
   main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -98,5 +138,44 @@ main #center li {
   main section {
     margin: 15px 0;
   }
+}
+
+#user-rate {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(230, 230, 230, 0.75);
+}
+
+#user-rate header {
+  text-align: center;
+  font-size: 22px;
+  padding: 7px 4px;
+}
+
+#user-rate #rate-form {
+  position: relative;
+  top: 20vh;
+  z-index: 150;
+  margin: auto;
+  width: 25%;
+  min-height: 25rem;
+  border-radius: 4px;
+  padding: 15px;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=main.css.map */
