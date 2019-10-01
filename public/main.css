@@ -106,6 +106,10 @@ main #parti-list-container {
           align-items: center;
 }
 
+main #parti-list-container li {
+  margin: 7px 3px;
+}
+
 main #parti-list-container button {
   position: absolute;
   bottom: 5px;
@@ -162,8 +166,10 @@ main #parti-list-container button {
   top: 20vh;
   z-index: 150;
   margin: auto;
+  min-width: 400px;
   width: 25%;
-  min-height: 25rem;
+  min-height: 18rem;
+  max-height: 25rem;
   border-radius: 4px;
   padding: 15px;
   height: auto;
@@ -177,5 +183,25 @@ main #parti-list-container button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow-y: scroll;
+}
+
+#user-rate #rate-form label {
+  font-size: 120%;
+}
+
+#user-rate #rate-form button {
+  margin: 7px auto;
+}
+
+#user-rate #exit {
+  font-size: 36px;
+  color: black;
+  background: transparent;
+  border: none;
+  position: relative;
+  float: right;
+  left: -15px;
+  top: 7px;
 }
 /*# sourceMappingURL=main.css.map */

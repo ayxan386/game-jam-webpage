@@ -178,4 +178,91 @@ module.exports = (app, db) => {
       }
     });
   });
+  app.put("/rateuser", (req, res) => {
+    db.collection("gameJam").findOne({}, (err, doc) => {
+      if (err) console.log(err);
+      if (doc) {
+        //console.log(doc.participants);
+        for (let i = 0; i < doc.participants.length; i++) {
+          let part = doc.participants[i];
+          if (part.nickname == req.body.rated) {
+            part.rates = {
+              gameplay: part.rates.gameplay
+                ? (Number.parseFloat(part.rates.gameplay) +
+                    Number.parseFloat(req.body.gameplay)) /
+                  2
+                : req.body.gameplay,
+              controll: part.rates.controll
+                ? (Number.parseFloat(part.rates.controll) +
+                    Number.parseFloat(req.body.controll)) /
+                  2
+                : req.body.controll,
+              ui: part.rates.ui
+                ? (Number.parseFloat(part.rates.ui) +
+                    Number.parseFloat(req.body.ui)) /
+                  2
+                : req.body.ui,
+              graphics: part.rates.graphics
+                ? (Number.parseFloat(part.rates.graphics) +
+                    Number.parseFloat(req.body.graphics)) /
+                  2
+                : req.body.graphics,
+              sfx: part.rates.sfx
+                ? (Number.parseFloat(part.rates.sfx) +
+                    Number.parseFloat(req.body.sfx)) /
+                  2
+                : req.body.sfx
+            };
+            break;
+          }
+        }
+        db.collection("gameJam").save(doc);
+      }
+    });
+  });
+  app.get("/myrates/:nickname", (req, res) => {
+    db.collection("gameJam").findOne({}, (err, doc) => {
+      if (err) console.log(err);
+      if (doc) {
+        //console.log(doc.participants);
+        let partRes = null;
+        doc.participants.forEach(part => {
+          //console.log(part);
+          if (part.nickname == req.params.nickname) {
+            partRes = part;
+          }
+        });
+        //console.log(rate);
+        if (partRes) {
+          // const nodemailer = require("nodemailer");
+          // const transporter = nodemailer.createTransport({
+          //   service: "gmail",
+          //   auth: {
+          //     user: process.env.email,
+          //     pass: process.env.emailPass
+          //   }
+          // });
+          // var mailOptions = {
+          //   from: process.env.email,
+          //   to: partRes.email,
+          //   subject: "Your Rates",
+          //   text: `Gameplay : ${partRes.rates.gameplay}/10\n
+          //   Controll System : ${partRes.rates.controll}/10\n
+          //   User Interface : ${partRes.rates.ui}/10\n
+          //   Graphics: ${partRes.rates.graphics}/10\n
+          //   Sounds/music : ${partRes.rates.sfx}/10\n`
+          // };
+          // transporter.sendMail(mailOptions, function(error, info) {
+          //   if (error) {
+          //     console.log(error);
+          //   } else {
+          //     console.log("Email sent: " + info.response);
+          //     res.redirect("/");
+          //   }
+          // });
+          res.send({ rate: partRes.rates });
+        }
+      }
+    });
+  });
 };

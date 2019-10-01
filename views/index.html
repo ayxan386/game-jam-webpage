@@ -70,9 +70,7 @@
         </div>
       </section>
       <section id="parti-list-container" class="bg-dark">
-        <ol id="parti-list">
-          <li class="list-group-item">aykhan</li>
-        </ol>
+        <ol id="parti-list"></ol>
         <button class="btn btn-danger" onclick="showRateUI()">
           Rate a user
         </button>
@@ -130,25 +128,80 @@
       </section>
     </main>
     <div id="user-rate">
+      <button onclick="hideRateUI()" id="exit">X</button>
       <form id="rate-form" class="jumbotron">
         <header>
           Please rate the user in all given categories is the scale of 1-10
         </header>
         <fieldset>
           <div class="form-group">
-            <label for="gameplay">Gameplay </label>
-            <input type="text" name="gameplay" placeholder="Gameplay" />
+            <label for="ratedname">User nickname</label>
+            <input
+              type="text"
+              name="ratedname"
+              placeholder="User nickname"
+              class="form-control"
+              required
+            />
           </div>
+          <div class="form-group">
+            <label for="gameplay">Gameplay </label>
+            <input
+              type="text"
+              name="gameplay"
+              placeholder="Gameplay"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="controll">Controll System </label>
+            <input
+              type="text"
+              name="controll"
+              placeholder="Controll System"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="ui">User Interface </label>
+            <input
+              type="text"
+              name="ui"
+              placeholder="User Interface"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="graphics">Graphics </label>
+            <input
+              type="text"
+              name="graphics"
+              placeholder="Graphics"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sfx">Sounds and Music </label>
+            <input
+              type="text"
+              name="sfx"
+              placeholder="Sounds and Music"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-info">RATE</button>
         </fieldset>
       </form>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="main.js"></script>
     <script src="timer.js"></script>
-    <script src="userInterface.js"></script>
+    <script src="onload.js"></script>
+    <script src="userrater.js"></script>
   </body>
 </html>
