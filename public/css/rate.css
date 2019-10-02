@@ -1,0 +1,25 @@
+#center {
+  text-align: center;
+}
+
+#rates {
+  margin: 25px auto;
+  padding: 25px 10px;
+}
+#rates li {
+  border-radius: 5px;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+#rates li:hover {
+  background: rgba(15, 220, 15, 0.75);
+  color: black;
+  font-weight: bolder;
+}
+footer a:hover {
+  background: rgba(15, 255, 15, 0.75);
+  padding: 10px 7px;
+}
+#center header {
+  padding: 25px 10px;
+}

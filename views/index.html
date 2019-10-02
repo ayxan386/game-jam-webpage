@@ -4,15 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="bootstrap.min.css" />
-    <link rel="stylesheet" href="main.css" />
-    <title>BHOS Game Jam</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Game Jam</title>
   </head>
   <body>
     <header id="header">
-      <h1>WELCOME TO OFFICIAL JAMING SITE</h1>
-      <h2 id="topic"></h2>
-      <h1 id="countdown"></h1>
+      <header>
+        <h1>WELCOME TO OFFICIAL JAMING SITE</h1>
+        <h2 id="topic"></h2>
+        <h1 id="countdown"></h1>
+      </header>
+      <div class="user-information bg-primary p-2">
+        <form id="get-user-rate">
+          <div class="form-group">
+            <label for="rate-email">Your email</label>
+            <input
+              name="rate-email"
+              placeholder="email"
+              class="form-control"
+              type="email"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">LOOK AT RATES</button>
+        </form>
+      </div>
     </header>
     <main class="jumbotron bg-light">
       <section id="topic-adder" class="bg-dark">
@@ -199,9 +216,9 @@
       </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="main.js"></script>
-    <script src="timer.js"></script>
-    <script src="onload.js"></script>
-    <script src="userrater.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/onload.js"></script>
+    <script src="js/userrater.js"></script>
   </body>
 </html>

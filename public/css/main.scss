@@ -9,9 +9,17 @@ html {
   font-size: 18px;
 }
 #header {
-  padding: 25px 15px;
   font-family: "MathJax_Caligraphic", "Arial";
   text-align: center;
+  display: grid;
+  grid-template-columns: 85% 15%;
+  #get-user-rate {
+    text-align: left;
+    height: 100%;
+  }
+  header {
+    margin: 25px;
+  }
 }
 main {
   display: grid;

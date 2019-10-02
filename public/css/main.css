@@ -11,9 +11,21 @@ html {
 }
 
 #header {
-  padding: 25px 15px;
   font-family: "MathJax_Caligraphic", "Arial";
   text-align: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 85% 15%;
+      grid-template-columns: 85% 15%;
+}
+
+#header #get-user-rate {
+  text-align: left;
+  height: 100%;
+}
+
+#header header {
+  margin: 25px;
 }
 
 main {

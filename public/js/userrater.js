@@ -36,3 +36,10 @@ $("#rate-form").submit(event => {
   });
   event.target.reset();
 });
+
+$("#get-user-rate").submit(event => {
+  event.preventDefault();
+  const email = $("input[name=rate-email]").val();
+  event.target.reset();
+  location.href = "/myrates?email=" + email;
+});

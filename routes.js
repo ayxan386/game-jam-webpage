@@ -220,47 +220,24 @@ module.exports = (app, db) => {
       }
     });
   });
-  app.get("/myrates/:nickname", (req, res) => {
+  app.get("/myrates", (req, res) => {
+    res.sendFile(path.join(__dirname, "/views", "rates.html"));
+  });
+  app.get("/getrates", (req, res) => {
     db.collection("gameJam").findOne({}, (err, doc) => {
       if (err) console.log(err);
       if (doc) {
-        //console.log(doc.participants);
+        //console.log(req.query);
         let partRes = null;
         doc.participants.forEach(part => {
           //console.log(part);
-          if (part.nickname == req.params.nickname) {
+          if (part.email == req.query.email) {
             partRes = part;
           }
         });
-        //console.log(rate);
+        //  console.log(partRes);
         if (partRes) {
-          // const nodemailer = require("nodemailer");
-          // const transporter = nodemailer.createTransport({
-          //   service: "gmail",
-          //   auth: {
-          //     user: process.env.email,
-          //     pass: process.env.emailPass
-          //   }
-          // });
-          // var mailOptions = {
-          //   from: process.env.email,
-          //   to: partRes.email,
-          //   subject: "Your Rates",
-          //   text: `Gameplay : ${partRes.rates.gameplay}/10\n
-          //   Controll System : ${partRes.rates.controll}/10\n
-          //   User Interface : ${partRes.rates.ui}/10\n
-          //   Graphics: ${partRes.rates.graphics}/10\n
-          //   Sounds/music : ${partRes.rates.sfx}/10\n`
-          // };
-          // transporter.sendMail(mailOptions, function(error, info) {
-          //   if (error) {
-          //     console.log(error);
-          //   } else {
-          //     console.log("Email sent: " + info.response);
-          //     res.redirect("/");
-          //   }
-          // });
-          res.send({ rate: partRes.rates });
+          res.send({ rates: partRes.rates });
         }
       }
     });
