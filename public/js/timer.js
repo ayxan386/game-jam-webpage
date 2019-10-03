@@ -2,7 +2,7 @@
 //if jam is running then start the countdown
 let timeTillEnd = 0;
 let id;
-window.onload = () => {
+const showTimer = () => {
   $.ajax({
     url: "/competitionInfo"
   }).done(data => {
@@ -32,7 +32,7 @@ window.onload = () => {
           id = setInterval(() => {
             timeTillEnd--;
             displayTime(timeTillEnd, true);
-            if (timeTillEnd == 0) clearInterval(id);
+            if (timeTillEnd <= 0) clearInterval(id);
           }, 1000);
         }
       }

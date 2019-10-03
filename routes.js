@@ -134,6 +134,37 @@ module.exports = (app, db) => {
       }
     });
   });
+  app.put("/autostart", (req, res) => {
+    db.collection("gameJam").findOne({}, (err, doc) => {
+      if (err) console.log(err);
+      if (doc) {
+        if (doc.password == req.body.pass) {
+          let mess = "";
+          if (!doc.isGoing) {
+            if (doc.start != -1 && doc.deadline != -1) {
+              const cron = require("node-cron");
+              console.log("Before job instantiation");
+              let date = new Date(doc.start);
+              const job = cron.schedule(
+                `${date.getSeconds()} ${date.getMinutes()} ${date.getHours()} ${date.getDate()} ${date.getMonth()} *`,
+                function() {
+                  let index = Math.floor(Math.random() * doc.topics.length);
+                  doc.selected = doc.topics[index];
+                  doc.isGoing = true;
+                  db.collection("gameJam").save(doc);
+                }
+              );
+              //job.start();
+              mess = "Jam timer started";
+            }
+          } else {
+            mess += "Set the deadline first";
+          }
+          res.send(mess);
+        }
+      }
+    });
+  });
   app.put("/endofterm", (req, res) => {
     db.collection("gameJam").findOne({}, (err, doc) => {
       if (err) console.log(err);

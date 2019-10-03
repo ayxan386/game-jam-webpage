@@ -86,3 +86,17 @@ $("#starter").submit(event => {
     }
   });
 });
+//Starting/stopping competion
+$("#auto-starter").submit(event => {
+  let pass = prompt("Password please");
+  event.preventDefault();
+  $.ajax({
+    url: "/autostart",
+    method: "PUT",
+    data: { pass }
+  }).done(data => {
+    if (data) {
+      $("#message-board").html(data);
+    }
+  });
+});

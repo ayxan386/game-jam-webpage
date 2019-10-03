@@ -14,27 +14,27 @@ window.onload = () => {
     console.log(rates);
     let item = document.createElement("li");
     item.className = "list-group-item";
-    item.innerHTML = "Gameplay : " + rates["gameplay"] + "/10";
+    item.innerHTML = "Gameplay : " + (rates["gameplay"] || 0) + "/10";
     $("#rates").append(item);
 
     item = document.createElement("li");
     item.className = "list-group-item";
-    item.innerHTML = "Controll System : " + rates["controll"] + "/10";
+    item.innerHTML = "Controll System : " + (rates["controll"] || 0) + "/10";
     $("#rates").append(item);
 
     item = document.createElement("li");
     item.className = "list-group-item";
-    item.innerHTML = "User interface : " + rates["ui"] + "/10";
+    item.innerHTML = "User interface : " + (rates["ui"] || 0) + "/10";
     $("#rates").append(item);
 
     item = document.createElement("li");
     item.className = "list-group-item";
-    item.innerHTML = "Graphics : " + rates["graphics"] + "/10";
+    item.innerHTML = "Graphics : " + (rates["graphics"] || 0) + "/10";
     $("#rates").append(item);
 
     item = document.createElement("li");
     item.className = "list-group-item";
-    item.innerHTML = "Sound effects : " + rates["sfx"] + "/10";
+    item.innerHTML = "Sound effects : " + (rates["sfx"] || 0) + "/10";
     $("#rates").append(item);
   });
 };

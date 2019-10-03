@@ -21,11 +21,29 @@ html {
 
 #header #get-user-rate {
   text-align: left;
-  height: 100%;
+  height: auto;
 }
 
 #header header {
   margin: 25px;
+}
+
+#header .user-information {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  height: 100%;
+  max-height: 9.5rem;
+  height: auto;
 }
 
 main {
@@ -103,7 +121,6 @@ main #parti-list-container {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: Pts;
-  overflow-y: scroll;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -116,15 +133,18 @@ main #parti-list-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-main #parti-list-container li {
+main #parti-list-container ul {
+  overflow-y: scroll;
+  position: relative;
+}
+
+main #parti-list-container ul li {
   margin: 7px 3px;
-}
-
-main #parti-list-container button {
-  position: absolute;
-  bottom: 5px;
 }
 
 #countdown {
@@ -153,6 +173,17 @@ main #parti-list-container button {
   }
   main section {
     margin: 15px 0;
+  }
+  #topic,
+  #countdown {
+    font-size: 42px;
+  }
+  #header {
+    -ms-grid-columns: 100%;
+        grid-template-columns: 100%;
+  }
+  #header h1 {
+    border-bottom: 2px solid black;
   }
 }
 
